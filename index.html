@@ -93,6 +93,30 @@
     }
     .nav-book:hover { background: var(--gold2) !important; }
 
+    /* ── HAMBURGER ───────────────────────────── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: .5rem;
+      z-index: 201;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform .25s ease, opacity .25s ease;
+    }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     /* ── HERO ─────────────────────────────────── */
     .hero {
       position: relative;
@@ -1042,7 +1066,25 @@
       .ig-cell.tall { grid-row: span 1; }
     }
     @media (max-width: 900px) {
-      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0; right: 0;
+        flex-direction: column;
+        background: rgba(5,12,23,0.97);
+        backdrop-filter: blur(16px);
+        padding: .5rem 5% 1.5rem;
+        gap: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links li { border-bottom: 1px solid rgba(201,168,76,0.08); }
+      .nav-links li:last-child { border: none; padding-top: .75rem; }
+      .nav-links a { padding: .9rem 0; display: block; font-size: 1rem; color: rgba(240,236,227,0.75); }
+      .nav-links a:hover { color: var(--gold); }
+      .nav-book { display: inline-block !important; padding: .7rem 1.8rem !important; margin-top: .25rem; }
       .about-inner, .approach-inner { grid-template-columns: 1fr; gap: 3rem; }
       .about-photo-wrap { max-width: 420px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
@@ -1111,11 +1153,15 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">Corey <em>Stigar</em></a>
+    <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#training">Training</a></li>
       <li><a href="#instagram">Feed</a></li>
       <li><a href="#testimonials">Results</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="https://professional-baseball-training.square.site" target="_blank" class="nav-book">Book a Session</a></li>
     </ul>
   </nav>
@@ -1372,10 +1418,10 @@
         </div>
       </div>
       <div class="ig-cell">
-        <img src="img/training-1.jpg"
-             alt="Corey Stigar Baseball white tiger logo" loading="lazy" />
+        <img src="img/photo-d.jpg"
+             alt="Coach Corey Stigar in CSB red shirt at the facility" loading="lazy" />
         <div class="ig-cell-overlay">
-          <div><p>Every player gets the attention their development demands.</p></div>
+          <div><p>Results come from the work between the big games.</p></div>
         </div>
       </div>
     </div>
@@ -1578,7 +1624,28 @@
       <span style="color:var(--border)">·</span>
       <a href="https://derekfairfield.com" target="_blank">Site by DerekFairfield.com</a>
     </div>
+    <p style="margin-top:1.25rem;font-size:0.75rem;opacity:0.4;">© 2026 Corey Stigar Baseball Academy. All rights reserved.</p>
   </footer>
+
+  <script>
+    (function() {
+      const btn = document.querySelector('.hamburger');
+      const menu = document.querySelector('.nav-links');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function() {
+        const isOpen = menu.classList.toggle('open');
+        btn.classList.toggle('active', isOpen);
+        btn.setAttribute('aria-expanded', isOpen);
+      });
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          menu.classList.remove('open');
+          btn.classList.remove('active');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+  </script>
 
 </body>
 </html>
