@@ -595,10 +595,10 @@
 
     .ig-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 260px);
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 280px);
       gap: .5rem;
-      max-width: 1200px;
+      max-width: 1000px;
     }
     .ig-cell {
       position: relative;
@@ -1062,8 +1062,7 @@
 
     /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 1024px) {
-      .ig-grid { grid-template-columns: repeat(3, 1fr); }
-      .ig-cell.tall { grid-row: span 1; }
+      .ig-grid { max-width: 100%; }
     }
     @media (max-width: 900px) {
       .hamburger { display: flex; }
@@ -1383,23 +1382,6 @@
           <div>
             <p>In the lab every day — The Pump Tank, Modesto.</p>
             <a href="https://instagram.com/coachcoreystigar" target="_blank">@coachcoreystigar ↗</a>
-          </div>
-        </div>
-      </div>
-      <div class="ig-cell">
-        <img src="img/photo-e.jpg"
-             alt="Coach Corey Stigar with youth baseball team at a field" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div><p>Building the next generation — from the first rep to the first scholarship.</p></div>
-        </div>
-      </div>
-      <div class="ig-cell">
-        <img src="img/image-42.jpg"
-             alt="Corey Stigar Baseball promo poster — batting stance" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div>
-            <p>🔥 Turn The Box Drill — rotate around your spine, no head movement.</p>
-            <a href="https://www.instagram.com/reel/DZiJqYtR5A6/" target="_blank">Watch reel ↗</a>
           </div>
         </div>
       </div>
