@@ -750,57 +750,26 @@
     }
     .instagram-follow:hover { background: var(--gold); color: var(--black); }
 
-    .ig-grid {
+    .ig-embed-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(2, 280px);
-      gap: .5rem;
-      max-width: 1000px;
+      gap: 1.5rem;
+      max-width: 1100px;
+      align-items: start;
     }
-    .ig-cell {
-      position: relative;
+    /* Instagram embeds render white iframes — wrap in a subtle dark card */
+    .ig-embed-cell {
+      border-radius: 6px;
       overflow: hidden;
       background: var(--navy);
-      border-radius: 3px;
-      cursor: pointer;
+      border: 1px solid var(--border);
     }
-    .ig-cell.tall {
-      grid-row: span 2;
-    }
-    .ig-cell img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      transition: transform .4s, filter .4s;
-      filter: brightness(.85) saturate(.9);
-    }
-    .ig-cell:hover img {
-      transform: scale(1.04);
-      filter: brightness(1) saturate(1);
-    }
-    .ig-cell-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(5,12,23,.85) 0%, transparent 50%);
-      opacity: 0;
-      transition: opacity .3s;
-      display: flex;
-      align-items: flex-end;
-      padding: 1.25rem;
-    }
-    .ig-cell:hover .ig-cell-overlay { opacity: 1; }
-    .ig-cell-overlay p {
-      font-size: .78rem;
-      color: rgba(240,236,227,.85);
-      line-height: 1.4;
-    }
-    .ig-cell-overlay a {
-      font-family: 'Space Mono', monospace;
-      font-size: .6rem;
-      letter-spacing: .12em;
-      color: var(--gold);
-      text-decoration: none;
+    .ig-embed-cell .instagram-media {
+      margin: 0 auto !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
     }
 
     /* ── TESTIMONIALS ─────────────────────────── */
@@ -1307,7 +1276,7 @@
 
     /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 1024px) {
-      .ig-grid { max-width: 100%; }
+      .ig-embed-grid { max-width: 100%; }
     }
     @media (max-width: 900px) {
       .action-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: 180px 180px 180px; }
@@ -1335,15 +1304,14 @@
       .about-photo-wrap { max-width: 420px; }
       .services-grid { grid-template-columns: 1fr 1fr; }
       .testimonials-grid { grid-template-columns: 1fr; max-width: 480px; }
-      .ig-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
-      .ig-cell.tall { grid-row: span 1; }
+      .ig-embed-grid { grid-template-columns: 1fr; max-width: 500px; }
     }
     @media (max-width: 600px) {
       .hero { padding: 0 5% 5rem; }
       .services-grid { grid-template-columns: 1fr; }
       .stats { flex-wrap: wrap; }
       .stat { max-width: 50%; border-bottom: 1px solid var(--border); }
-      .ig-grid { grid-template-columns: repeat(2, 1fr); }
+
     }
   </style>
   <script type="application/ld+json">
@@ -1683,49 +1651,42 @@
       </a>
     </div>
 
-    <div class="ig-grid">
-      <!-- Tall featured cell -->
-      <div class="ig-cell tall">
-        <img src="img/photo-a.jpg"
-             alt="Coach Corey Stigar tee swing at The Pump Tank facility" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div>
-            <p>Full-force reps at The Pump Tank.</p>
-            <a href="https://instagram.com/coachcoreystigar" target="_blank">@coachcoreystigar ↗</a>
+    <div class="ig-embed-grid">
+      <!-- Real post: Live AB's vs high school kids — Oct 2025 -->
+      <div class="ig-embed-cell">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/DQA61iTkVNh/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
+          <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
+            <a href="https://www.instagram.com/reel/DQA61iTkVNh/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
           </div>
-        </div>
+        </blockquote>
       </div>
-      <!-- Grid cells -->
-      <div class="ig-cell">
-        <img src="img/photo-b.jpg"
-             alt="Coach Corey Stigar at The Pump Tank with bat on shoulder" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div>
-            <p>In the lab every day — The Pump Tank, Modesto.</p>
-            <a href="https://instagram.com/coachcoreystigar" target="_blank">@coachcoreystigar ↗</a>
+      <!-- Real post: Top-hand development drill — Jan 2026 -->
+      <div class="ig-embed-cell">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/DQEu-ZnkWAl/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
+          <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
+            <a href="https://www.instagram.com/reel/DQEu-ZnkWAl/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
           </div>
-        </div>
+        </blockquote>
       </div>
-      <div class="ig-cell">
-        <img src="img/image-44.jpg"
-             alt="Coach Corey Stigar with young student at CSB facility" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div><p>Every rep. Every player. Every level. This is why we do it.</p></div>
-        </div>
-      </div>
-      <div class="ig-cell">
-        <img src="img/training-5.jpg"
-             alt="Corey Stigar Baseball red tiger brand mark" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div><p>The CSB tiger — built to compete, trained to win.</p></div>
-        </div>
-      </div>
-      <div class="ig-cell">
-        <img src="img/photo-d.jpg"
-             alt="Coach Corey Stigar in CSB red shirt at the facility" loading="lazy" />
-        <div class="ig-cell-overlay">
-          <div><p>Results come from the work between the big games.</p></div>
-        </div>
+      <!-- Real post: The Grind facility — Feb 2026 (most recent) -->
+      <div class="ig-embed-cell">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/DVOcqeFkwtE/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
+          <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
+            <a href="https://www.instagram.com/reel/DVOcqeFkwtE/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
+          </div>
+        </blockquote>
       </div>
     </div>
   </section>
@@ -1994,6 +1955,9 @@
       });
     })();
   </script>
+
+  <!-- Instagram native embed: activates all blockquote.instagram-media elements on the page -->
+  <script async src="//www.instagram.com/embed.js"></script>
 
 </body>
 </html>
