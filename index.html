@@ -28,6 +28,9 @@
       --white:   #f0ece3;
       --gray:    #8a929e;
       --border:  rgba(201,168,76,0.14);
+      --red:     #e83b2e;
+      --red2:    #ff5a4a;
+      --red-dim: rgba(232,59,46,0.12);
     }
 
     html { scroll-behavior: smooth; }
@@ -138,15 +141,22 @@
       height: 100%;
       object-fit: cover;
       object-position: center 20%;
-      filter: brightness(0.32) saturate(0.6) contrast(1.2);
+      filter: brightness(0.55) saturate(0.95) contrast(1.05);
     }
     .hero-bg::after {
       content: '';
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(to top, rgba(5,12,23,0.97) 0%, rgba(5,12,23,0.4) 50%, rgba(5,12,23,0.25) 100%),
-        linear-gradient(105deg, rgba(5,12,23,0.7) 0%, transparent 60%);
+        linear-gradient(to top, rgba(5,12,23,0.98) 0%, rgba(5,12,23,0.55) 42%, rgba(5,12,23,0.1) 100%),
+        linear-gradient(105deg, rgba(5,12,23,0.75) 0%, transparent 55%);
+    }
+    .hero-energy-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%);
+      z-index: 2;
     }
 
     .hero-inner {
@@ -301,9 +311,45 @@
       font-size: .7rem;
     }
 
+    /* ── PHOTO WALL ─────────────────────────────── */
+    .photo-wall {
+      background: var(--black);
+      overflow: hidden;
+      padding: 0;
+    }
+    .photo-wall-track {
+      display: flex;
+      gap: .4rem;
+      animation: photo-scroll 38s linear infinite;
+      width: max-content;
+    }
+    .photo-wall:hover .photo-wall-track { animation-play-state: paused; }
+    @keyframes photo-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .photo-wall-cell {
+      width: 240px;
+      height: 300px;
+      flex-shrink: 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .photo-wall-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.88) saturate(0.85);
+      transition: filter .4s;
+    }
+    .photo-wall-cell:hover img { filter: brightness(1) saturate(1.1); }
+    .photo-wall-cell.wide { width: 360px; }
+
     /* ── STATS BAR ─────────────────────────────── */
     .stats {
       background: var(--navy2);
+      border-top: 3px solid var(--red);
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: center;
@@ -319,20 +365,112 @@
     .stat:last-child { border-right: none; }
     .stat-num {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 800;
+      font-size: 3.2rem;
+      font-weight: 900;
       color: var(--gold);
       line-height: 1;
       letter-spacing: -.02em;
     }
+    .stat:first-child .stat-num { color: var(--white); }
     .stat-label {
       font-family: 'Space Mono', monospace;
-      font-size: .6rem;
+      font-size: .58rem;
       letter-spacing: .14em;
       color: rgba(240,236,227,.5);
-      margin-top: .4rem;
+      margin-top: .5rem;
       text-transform: uppercase;
     }
+
+    /* ── ACTION GALLERY ────────────────────────── */
+    .action-gallery {
+      padding: 5rem 7%;
+      background: var(--black);
+    }
+    .action-gallery-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .action-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 220px 220px;
+      gap: .4rem;
+      max-width: 1200px;
+    }
+    .action-cell {
+      overflow: hidden;
+      position: relative;
+      border-radius: 3px;
+    }
+    .action-cell.span2 { grid-column: span 2; grid-row: span 2; }
+    .action-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      filter: brightness(0.85) saturate(0.8);
+      transition: transform .45s ease, filter .35s;
+    }
+    .action-cell:hover img { transform: scale(1.06); filter: brightness(1) saturate(1.05); }
+    .action-cell-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: .6rem .8rem;
+      background: linear-gradient(to top, rgba(5,12,23,.85) 0%, transparent 100%);
+      font-family: 'Space Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(240,236,227,.65);
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .action-cell:hover .action-cell-label { opacity: 1; }
+
+    /* ── RED CTA BUTTON ───────────────────────── */
+    .btn-red {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .9rem 2.5rem;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn-red:hover { background: var(--red2); transform: translateY(-1px); }
+
+    /* ── WIN BADGES ─────────────────────────────── */
+    .win-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-bottom: 2.5rem;
+    }
+    .win-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .45rem .9rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .win-badge .badge-icon { font-size: .95rem; }
 
     /* ── SECTION UTILS ─────────────────────────── */
     .section-tag {
@@ -459,6 +597,18 @@
       position: relative;
       overflow: hidden;
     }
+    .philosophy-photo-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .philosophy-photo-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      filter: brightness(0.15) saturate(0.4);
+    }
     .philosophy::before {
       content: '"';
       position: absolute;
@@ -467,16 +617,17 @@
       font-family: 'Barlow Condensed', sans-serif;
       font-size: 20rem;
       font-weight: 900;
-      color: rgba(201,168,76,.05);
+      color: rgba(232,59,46,.08);
       line-height: 1;
       pointer-events: none;
+      z-index: 1;
     }
     .philosophy-inner {
       max-width: 900px;
       margin: 0 auto;
       text-align: center;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
     .philosophy-quote {
       font-family: 'Barlow Condensed', sans-serif;
@@ -543,11 +694,17 @@
       font-weight: 700;
       letter-spacing: .18em;
       color: rgba(201,168,76,.4);
-      margin-bottom: 1rem;
+      margin-bottom: .5rem;
+    }
+    .service-icon {
+      font-size: 1.8rem;
+      margin-bottom: .75rem;
+      display: block;
+      line-height: 1;
     }
     .service-card h3 {
       font-family: 'Barlow Condensed', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: .04em;
@@ -1153,6 +1310,8 @@
       .ig-grid { max-width: 100%; }
     }
     @media (max-width: 900px) {
+      .action-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: 180px 180px 180px; }
+      .action-cell.span2 { grid-column: span 1; grid-row: span 1; }
       .hamburger { display: flex; }
       .nav-links {
         display: none;
@@ -1260,15 +1419,16 @@
       <img src="img/image-41.jpg" alt="Coach Corey Stigar in batting stance at his indoor training facility" />
     </div>
     <div class="hero-inner">
-      <div class="hero-tag">Riverbank, CA · Est. 2013 · Youth — College Level</div>
+      <div class="hero-tag">Riverbank &amp; Modesto, CA · Est. 2013 · All Ages Welcome ⚾</div>
       <h1>Train Like<br /><span class="accent">It Matters.</span><br /><span class="stroke">Because It Does.</span></h1>
-      <p class="hero-sub">Elite baseball development built around the complete athlete — mechanics, mental game, strength, and the path to the next level. Over 10 years developing players who go further.</p>
+      <p class="hero-sub">From your first swing to your first showcase — Coach Corey builds complete athletes. Over 10 years of real results in the Central Valley. Youth, travel ball, high school, college prep.</p>
       <div class="hero-actions">
         <a href="https://professional-baseball-training.square.site" target="_blank" class="btn-primary">Book Your Session →</a>
-        <a href="#instagram" class="btn-outline">See Training in Action</a>
+        <a href="#action-gallery" class="btn-outline">See It in Action</a>
       </div>
     </div>
     <div class="hero-scroll">Scroll</div>
+    <div class="hero-energy-bar"></div>
   </section>
 
   <!-- TICKER -->
@@ -1295,6 +1455,35 @@
       <span class="ticker-item">Riverbank CA</span>
       <span class="ticker-item">Modesto CA</span>
       <span class="ticker-item">Central Valley</span>
+    </div>
+  </div>
+
+  <!-- PHOTO WALL -->
+  <div class="photo-wall">
+    <div class="photo-wall-track">
+      <div class="photo-wall-cell wide"><img src="img/image-41.jpg" alt="Coach Corey batting stance" /></div>
+      <div class="photo-wall-cell"><img src="img/image-44.jpg" alt="Coach Corey with student" /></div>
+      <div class="photo-wall-cell wide"><img src="img/IMG_0189.jpeg" alt="Coach Corey" /></div>
+      <div class="photo-wall-cell"><img src="img/photo-a.jpg" alt="Tee swing drill" /></div>
+      <div class="photo-wall-cell"><img src="img/IMG_0191.jpeg" alt="Training session" /></div>
+      <div class="photo-wall-cell wide"><img src="img/photo-b.jpg" alt="Coach at The Pump Tank" /></div>
+      <div class="photo-wall-cell"><img src="img/Corey_Steger_.jpeg" alt="Coach Corey portrait" /></div>
+      <div class="photo-wall-cell"><img src="img/photo-d.jpg" alt="Coach Corey in CSB gear" /></div>
+      <div class="photo-wall-cell wide"><img src="img/image-30.jpg" alt="Coach Corey professional portrait" /></div>
+      <div class="photo-wall-cell"><img src="img/Image_16.jpeg" alt="Coaching in action" /></div>
+      <div class="photo-wall-cell"><img src="img/Image_27.jpeg" alt="Coach Corey" /></div>
+      <!-- duplicate for seamless loop -->
+      <div class="photo-wall-cell wide"><img src="img/image-41.jpg" alt="Coach Corey batting stance" /></div>
+      <div class="photo-wall-cell"><img src="img/image-44.jpg" alt="Coach Corey with student" /></div>
+      <div class="photo-wall-cell wide"><img src="img/IMG_0189.jpeg" alt="Coach Corey" /></div>
+      <div class="photo-wall-cell"><img src="img/photo-a.jpg" alt="Tee swing drill" /></div>
+      <div class="photo-wall-cell"><img src="img/IMG_0191.jpeg" alt="Training session" /></div>
+      <div class="photo-wall-cell wide"><img src="img/photo-b.jpg" alt="Coach at The Pump Tank" /></div>
+      <div class="photo-wall-cell"><img src="img/Corey_Steger_.jpeg" alt="Coach Corey portrait" /></div>
+      <div class="photo-wall-cell"><img src="img/photo-d.jpg" alt="Coach Corey in CSB gear" /></div>
+      <div class="photo-wall-cell wide"><img src="img/image-30.jpg" alt="Coach Corey professional portrait" /></div>
+      <div class="photo-wall-cell"><img src="img/Image_16.jpeg" alt="Coaching in action" /></div>
+      <div class="photo-wall-cell"><img src="img/Image_27.jpeg" alt="Coach Corey" /></div>
     </div>
   </div>
 
@@ -1338,25 +1527,29 @@
         <div class="section-tag">Meet Your Coach</div>
         <h2>Corey <span class="accent">Stigar</span></h2>
         <div class="divider"></div>
-        <p>The focus of Corey Stigar Baseball is to give kids the knowledge and opportunity to get better, and be the best baseball player they can be. Focusing on hitting, fielding, and agility, Corey and his trained coaches work with kids and adults of all ages — giving them the confidence and support it takes to reach where they want to be in baseball.</p>
-        <p>Established in 2013 after working with players for over a decade, Coach Corey built his program from the ground up in the Central Valley — the right way. No shortcuts. No false promises. Just real development, real reps, and real results.</p>
-        <ul class="credential-list">
-          <li>Humphreys University — Stockton, CA</li>
-          <li>Established 2013 — over 10 years developing players</li>
-          <li>Hitting, fielding, and agility specialist</li>
-          <li>Works with youth through adult athletes of all skill levels</li>
-          <li>📍 2301–2355 Novi Dr, Riverbank, CA 95367</li>
-          <li>📍 4606 Elm St, Modesto, CA 95356</li>
-          <li>📞 <a href="tel:4087018030" style="color:var(--gold);text-decoration:none;">408-701-8030</a></li>
-          <li>Mon–Sat · 9:00 AM – 8:00 PM</li>
-        </ul>
-        <a href="https://professional-baseball-training.square.site" target="_blank" class="btn-primary">Book Your First Session →</a>
+        <p>The focus of Corey Stigar Baseball is to give every player — from first-timers to college-bound athletes — the knowledge, reps, and confidence to become the best baseball player they can be. Hitting, fielding, agility, and the mental game: Coach Corey coaches the whole athlete.</p>
+        <p>Built from the ground up in the Central Valley since 2013. No shortcuts. No false promises. Just real development, real reps, and real results — the kind that show up on game day.</p>
+        <div class="win-row">
+          <span class="win-badge"><span class="badge-icon">⚾</span> Est. 2013</span>
+          <span class="win-badge"><span class="badge-icon">📍</span> Riverbank &amp; Modesto</span>
+          <span class="win-badge"><span class="badge-icon">🎓</span> Humphreys University</span>
+          <span class="win-badge"><span class="badge-icon">🕘</span> Mon–Sat · 9AM–8PM</span>
+          <span class="win-badge"><span class="badge-icon">⚡</span> All Ages &amp; Levels</span>
+          <span class="win-badge"><span class="badge-icon">💯</span> 96% Facebook Recommend</span>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="https://professional-baseball-training.square.site" target="_blank" class="btn-primary">Book Your First Session →</a>
+          <a href="tel:4087018030" class="btn-outline">📞 408-701-8030</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ORIGIN STORY QUOTE -->
   <section class="philosophy">
+    <div class="philosophy-photo-bg">
+      <img src="img/training-7.jpg" alt="" aria-hidden="true" />
+    </div>
     <div class="philosophy-inner">
       <div class="section-tag" style="justify-content:center;">The Origin Story</div>
       <blockquote class="philosophy-quote">
@@ -1381,33 +1574,72 @@
     <div class="services-grid">
       <div class="service-card">
         <div class="service-num">01</div>
-        <h3>Precision Training</h3>
-        <p>Master the fundamentals with professional-grade techniques. Mechanics, timing, and execution built from the ground up — every rep intentional.</p>
+        <span class="service-icon">⚾</span>
+        <h3>Precision Hitting</h3>
+        <p>Master the fundamentals with pro-grade technique. Mechanics, timing, swing path, and contact point — every rep built with purpose.</p>
       </div>
       <div class="service-card">
         <div class="service-num">02</div>
-        <h3>Strength &amp; Conditioning</h3>
-        <p>Age-appropriate programs that build explosive power, speed, and endurance — designed to maximize performance without risking injury.</p>
+        <span class="service-icon">🧤</span>
+        <h3>Fielding &amp; Defense</h3>
+        <p>Footwork, range, positioning, and glove work for infielders and outfielders. Build the defensive instincts coaches notice at tryouts.</p>
       </div>
       <div class="service-card">
         <div class="service-num">03</div>
+        <span class="service-icon">🧠</span>
         <h3>Mental Game</h3>
-        <p>Develop the mental toughness that separates exceptional athletes from average ones. Focus, composure, and competitive confidence under pressure.</p>
+        <p>The mental edge that separates good players from great ones. Focus, composure, and competitive confidence — even when the game is on the line.</p>
       </div>
       <div class="service-card">
         <div class="service-num">04</div>
+        <span class="service-icon">⚡</span>
         <h3>Speed &amp; Agility</h3>
-        <p>Explosive movement training for improved reaction time, first-step quickness, base running efficiency, and outfield range.</p>
+        <p>Explosive movement training: reaction time, first-step quickness, base running, and outfield range. Be the fastest version of yourself.</p>
       </div>
       <div class="service-card">
         <div class="service-num">05</div>
+        <span class="service-icon">🎓</span>
         <h3>College Prep</h3>
-        <p>Navigate the recruitment process with confidence. Skill showcase strategy, film preparation, and the exposure tools you need to get noticed.</p>
+        <p>Navigate recruitment with confidence. Showcase strategy, film prep, and the exposure tools you need to get noticed at the next level.</p>
       </div>
       <div class="service-card">
         <div class="service-num">06</div>
-        <h3>Parent Resources</h3>
-        <p>Guides and support for parents at every stage of youth baseball development — so the whole family is aligned on the path forward.</p>
+        <span class="service-icon">👨‍👩‍👦</span>
+        <h3>Family Support</h3>
+        <p>Resources and guidance for parents at every stage of youth baseball — so the whole team at home is on the same page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTION GALLERY -->
+  <section class="action-gallery" id="action-gallery">
+    <div class="action-gallery-header">
+      <div>
+        <div class="section-tag">Real Training · Real Results</div>
+        <h2>Inside the <span class="accent">Lab</span></h2>
+      </div>
+      <a href="https://instagram.com/coachcoreystigar" target="_blank" class="btn-outline" style="font-size:.8rem;padding:.65rem 1.4rem;">Follow @coachcoreystigar ↗</a>
+    </div>
+    <div class="action-grid">
+      <div class="action-cell span2">
+        <img src="img/image-41.jpg" alt="Coach Corey Stigar — batting stance in training facility" loading="lazy" />
+        <div class="action-cell-label">Inside the facility — every rep counts</div>
+      </div>
+      <div class="action-cell">
+        <img src="img/photo-a.jpg" alt="Coach Corey full-force tee swing at The Pump Tank" loading="lazy" />
+        <div class="action-cell-label">Full-force tee work</div>
+      </div>
+      <div class="action-cell">
+        <img src="img/photo-d.jpg" alt="Coach Corey in CSB gear at the training facility" loading="lazy" />
+        <div class="action-cell-label">Ready to work</div>
+      </div>
+      <div class="action-cell">
+        <img src="img/photo-b.jpg" alt="Coach Corey at The Pump Tank facility" loading="lazy" />
+        <div class="action-cell-label">The Pump Tank · Modesto</div>
+      </div>
+      <div class="action-cell">
+        <img src="img/image-30.jpg" alt="Coach Corey Stigar — professional portrait" loading="lazy" />
+        <div class="action-cell-label">Coach Corey Stigar</div>
       </div>
     </div>
   </section>
