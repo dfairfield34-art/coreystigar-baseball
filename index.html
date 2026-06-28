@@ -1274,6 +1274,54 @@
       .faq-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── STICKY MOBILE BOOK BAR ──────────────── */
+    .sticky-book-bar {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 999;
+      background: var(--black);
+      border-top: 2px solid var(--gold);
+      padding: .85rem 5%;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+    }
+    .sticky-book-bar-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(240,236,227,.6);
+      line-height: 1.3;
+    }
+    .sticky-book-bar-text strong {
+      display: block;
+      color: var(--white);
+      font-size: 1rem;
+    }
+    .sticky-book-bar a {
+      flex-shrink: 0;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .85rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .75rem 1.6rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    @media (max-width: 700px) {
+      .sticky-book-bar { display: flex; }
+      /* add bottom clearance so footer isn't hidden under the bar */
+      footer { padding-bottom: 5rem; }
+    }
+
     /* ── RESPONSIVE ───────────────────────────── */
     @media (max-width: 1024px) {
       .ig-embed-grid { max-width: 100%; }
@@ -1429,29 +1477,27 @@
   <!-- PHOTO WALL -->
   <div class="photo-wall">
     <div class="photo-wall-track">
-      <div class="photo-wall-cell wide"><img src="img/image-41.jpg" alt="Coach Corey batting stance" /></div>
-      <div class="photo-wall-cell"><img src="img/image-44.jpg" alt="Coach Corey with student" /></div>
-      <div class="photo-wall-cell wide"><img src="img/IMG_0189.jpeg" alt="Coach Corey" /></div>
-      <div class="photo-wall-cell"><img src="img/photo-a.jpg" alt="Tee swing drill" /></div>
+      <div class="photo-wall-cell wide"><img src="img/image-41.jpg" alt="Coach Corey batting stance at training facility" /></div>
+      <div class="photo-wall-cell wide"><img src="img/IMG_0189.jpeg" alt="Coach Corey Stigar" /></div>
+      <div class="photo-wall-cell"><img src="img/photo-a.jpg" alt="Full-force tee swing drill" /></div>
       <div class="photo-wall-cell"><img src="img/IMG_0191.jpeg" alt="Training session" /></div>
-      <div class="photo-wall-cell wide"><img src="img/photo-b.jpg" alt="Coach at The Pump Tank" /></div>
-      <div class="photo-wall-cell"><img src="img/Corey_Steger_.jpeg" alt="Coach Corey portrait" /></div>
+      <div class="photo-wall-cell wide"><img src="img/photo-b.jpg" alt="Coach Corey at The Pump Tank" /></div>
+      <div class="photo-wall-cell"><img src="img/Corey_Steger_.jpeg" alt="Coach Corey Stigar portrait" /></div>
       <div class="photo-wall-cell"><img src="img/photo-d.jpg" alt="Coach Corey in CSB gear" /></div>
       <div class="photo-wall-cell wide"><img src="img/image-30.jpg" alt="Coach Corey professional portrait" /></div>
       <div class="photo-wall-cell"><img src="img/Image_16.jpeg" alt="Coaching in action" /></div>
-      <div class="photo-wall-cell"><img src="img/Image_27.jpeg" alt="Coach Corey" /></div>
+      <div class="photo-wall-cell"><img src="img/Image_27.jpeg" alt="Coach Corey Stigar" /></div>
       <!-- duplicate for seamless loop -->
-      <div class="photo-wall-cell wide"><img src="img/image-41.jpg" alt="Coach Corey batting stance" /></div>
-      <div class="photo-wall-cell"><img src="img/image-44.jpg" alt="Coach Corey with student" /></div>
-      <div class="photo-wall-cell wide"><img src="img/IMG_0189.jpeg" alt="Coach Corey" /></div>
-      <div class="photo-wall-cell"><img src="img/photo-a.jpg" alt="Tee swing drill" /></div>
+      <div class="photo-wall-cell wide"><img src="img/image-41.jpg" alt="Coach Corey batting stance at training facility" /></div>
+      <div class="photo-wall-cell wide"><img src="img/IMG_0189.jpeg" alt="Coach Corey Stigar" /></div>
+      <div class="photo-wall-cell"><img src="img/photo-a.jpg" alt="Full-force tee swing drill" /></div>
       <div class="photo-wall-cell"><img src="img/IMG_0191.jpeg" alt="Training session" /></div>
-      <div class="photo-wall-cell wide"><img src="img/photo-b.jpg" alt="Coach at The Pump Tank" /></div>
-      <div class="photo-wall-cell"><img src="img/Corey_Steger_.jpeg" alt="Coach Corey portrait" /></div>
+      <div class="photo-wall-cell wide"><img src="img/photo-b.jpg" alt="Coach Corey at The Pump Tank" /></div>
+      <div class="photo-wall-cell"><img src="img/Corey_Steger_.jpeg" alt="Coach Corey Stigar portrait" /></div>
       <div class="photo-wall-cell"><img src="img/photo-d.jpg" alt="Coach Corey in CSB gear" /></div>
       <div class="photo-wall-cell wide"><img src="img/image-30.jpg" alt="Coach Corey professional portrait" /></div>
       <div class="photo-wall-cell"><img src="img/Image_16.jpeg" alt="Coaching in action" /></div>
-      <div class="photo-wall-cell"><img src="img/Image_27.jpeg" alt="Coach Corey" /></div>
+      <div class="photo-wall-cell"><img src="img/Image_27.jpeg" alt="Coach Corey Stigar" /></div>
     </div>
   </div>
 
@@ -1642,8 +1688,8 @@
   <section class="instagram" id="instagram">
     <div class="instagram-header">
       <div>
-        <div class="section-tag">Instagram</div>
-        <h2>Training <span class="accent">In Action</span></h2>
+        <div class="section-tag">From the Field · @coachcoreystigar</div>
+        <h2>Real Work. <span class="accent">Real Players.</span></h2>
         <div class="divider" style="margin-bottom:0;"></div>
       </div>
       <a href="https://instagram.com/coachcoreystigar" target="_blank" class="instagram-follow">
@@ -1685,6 +1731,42 @@
           style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
           <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
             <a href="https://www.instagram.com/reel/DVOcqeFkwtE/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
+          </div>
+        </blockquote>
+      </div>
+      <!-- Real post: Patrick Delgiorno — named Friday client session -->
+      <div class="ig-embed-cell">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/DKSpRizSv99/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
+          <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
+            <a href="https://www.instagram.com/reel/DKSpRizSv99/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
+          </div>
+        </blockquote>
+      </div>
+      <!-- Real post: 8U Christian Garcia — "First session ever with me" -->
+      <div class="ig-embed-cell">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/C3DC1SXOF_W/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
+          <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
+            <a href="https://www.instagram.com/reel/C3DC1SXOF_W/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
+          </div>
+        </blockquote>
+      </div>
+      <!-- Real post: Bownet partnership reel -->
+      <div class="ig-embed-cell">
+        <blockquote class="instagram-media"
+          data-instgrm-captioned
+          data-instgrm-permalink="https://www.instagram.com/reel/DOv-HdwibM8/?utm_source=ig_embed&amp;utm_campaign=loading"
+          data-instgrm-version="14"
+          style="background:#FFF; border:0; border-radius:0; box-shadow:none; margin:0; max-width:100%; min-width:326px; padding:0; width:100%;">
+          <div style="padding:16px; font-family:sans-serif; font-size:.9rem; color:#333;">
+            <a href="https://www.instagram.com/reel/DOv-HdwibM8/?utm_source=ig_embed" target="_blank" style="color:#0095f6;">View this post on Instagram</a>
           </div>
         </blockquote>
       </div>
@@ -1955,6 +2037,15 @@
       });
     })();
   </script>
+
+  <!-- Sticky mobile booking bar (visible only on phones) -->
+  <div class="sticky-book-bar">
+    <div class="sticky-book-bar-text">
+      <strong>Ready to work?</strong>
+      Mon–Sat · 9AM–8PM
+    </div>
+    <a href="https://professional-baseball-training.square.site" target="_blank">Book a Session →</a>
+  </div>
 
   <!-- Instagram native embed: activates all blockquote.instagram-media elements on the page -->
   <script async src="//www.instagram.com/embed.js"></script>
